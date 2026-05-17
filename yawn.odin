@@ -35,5 +35,17 @@ timer :: proc(t: ^thread.Thread) {
 
     time.sleep(time.Duration(minutes) * time.Minute)
 
-    // add notification system here 
+    #partial switch ODIN_OS {
+    case .Linux:
+        libc.system("notify-send 'Yawn' 'Yo, timer finished'")
+        
+    case .Darwin:
+        libc.system("osascript -e 'display notification \"Yo, timer finished\" with title \"Yawn\"'")
+        
+    case .Windows:
+        libc.system("powershell -Command \"Add-Type -AssemblyName PresentationFramework; [System.Windows.MessageBox]::Show('Yo, timer finished', 'Yawn')\"")
+        
+    case:
+        fmt.println("Sorry bud, notifications aren't supported on this OS!")
+    }
 }
