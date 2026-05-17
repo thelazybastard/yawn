@@ -29,11 +29,21 @@ main ::proc() {
 }
 
 timer :: proc(t: ^thread.Thread) {
-    minutes := t.user_index
+    countdown_minutes := t.user_index
+    countdown_seconds := countdown_minutes * 60
 
     fmt.println("Clock's tickin. You'll be notified when it ends!")
 
-    time.sleep(time.Duration(minutes) * time.Minute)
+    for i := countdown_seconds; i > 0; i -=1 {
+        minutes := i / 60
+        seconds := i % 60
+
+        fmt.printf("\rTime remaining: %02d:%02d", minutes, seconds)
+
+        time.sleep(1 * time.Second)
+    }
+
+    fmt.printf("\rTime remaining: 00:00\n")
 
     #partial switch ODIN_OS {
     case .Linux:
