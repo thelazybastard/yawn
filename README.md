@@ -17,7 +17,7 @@ Pre-built binaries for Windows, macOS, and Linux are available on the [Releases]
    ```bash
    chmod +x yawn-*
    ```
-4. Optionally, add it to your `PATH` for system-wide access:
+4. Add it to your `PATH` for system-wide access:
    - **macOS/Linux**: Move to `/usr/local/bin/` and rename it:
      ```bash
      mv yawn-macos /usr/local/bin/yawn
